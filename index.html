@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<title>Math Lessons</title>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
+<style>
+:root{--bg:#f3f6fb;--card:#fff;--ink:#14213d;--mute:#5b6783;--line:#dbe2ef;--vid:#1d4ed8;--sh:#0f766e;--off:#94a3b8;
+box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1424;--card:#172038;--ink:#eef2ff;--mute:#9aa7c7;--line:#27335a;--vid:#6ea0ff;--sh:#4fd1c1;--off:#5b6783}}
+:root[data-theme="dark"]{--bg:#0e1424;--card:#172038;--ink:#eef2ff;--mute:#9aa7c7;--line:#27335a;--vid:#6ea0ff;--sh:#4fd1c1;--off:#5b6783}
+*{box-sizing:border-box}
+body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,Arial,sans-serif}
+header{max-width:760px;margin:0 auto;padding:40px 20px 16px}
+h1{margin:0 0 6px;font-size:2rem;font-weight:800}
+header p{margin:0;color:var(--mute)}
+main{max-width:760px;margin:0 auto;padding:12px 20px 48px;display:grid;gap:14px}
+.lesson{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
+.lesson h2{margin:0 0 12px;font-size:1.2rem;font-weight:800;direction:ltr;text-align:left}
+.links{display:grid;gap:8px}
+.links a,.links span{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);text-decoration:none;font-weight:600}
+.links a.v{color:var(--vid)}.links a.s{color:var(--sh)}
+.links a:hover,.links a:focus-visible{background:var(--bg);outline:2px solid currentColor;outline-offset:1px}
+.links span{color:var(--off);border-style:dashed}
+.links small{margin-inline-start:auto;font-weight:400;color:var(--mute)}
+</style>
+</head>
+<body>
+<header><h1>Math Lessons</h1><p>Pick a lesson, watch the recording, and solve the sheet.</p></header>
+<main id="list"></main>
+<script>
+const L=[
+["Percent","1ZxUgDg8l3AqkAlpwXOlYHu17gievQi9f","1dYDKbFo9E9VkS_1ClbU51kYWD_TGpIgV"],
+["Linear equation","1SQD6do3t3rvRscp4pwgIKJv4upY6XfFl","13aTEbHZnCJSDgaStHUjRMN26p82eGaZq"],
+["System of equation","1331w47a6-cQE5zasAIqrOHy4tjIf0ZeL","1anLduHyQo4JiRLu1kcnIWsY0Jh7H3v0Q"],
+["Functions","1kdTJl7qochLozu7mFcr_Lj5gHEgDiMae","17-d6CtLe0783tAafLQSkefbL5SxSj5b9"],
+["Quadratic equation","1GmdSUzVjl3A3CKquckiCxr8L2WZZWD-x","11bEo-r_TCSQkLgT0fK5TFGLYcAPWLzmW"],
+["Inequality","1xYOiYWEWDA_5MGNfUg_H-ZiimZIyKj64",""],
+["Absolute value","",""],
+["Angles","",""],
+["Triangles","13BDDM6KbAUbSZ7efw9tpoQvqjfvMqkgX","1HH9oLKjgDwarbirz46vMThyeq6dKyPQV"],
+["Circles","",""],
+["Trigonometry","",""],
+["Mean, mode, median","1xOYtTnZIZaN-ptdcvVGTaurlEVB0rW1R",""],
+["Graphs","1INRXWDLCrL5WVnIBcc7h3Kd3i9Le6Kae",""],
+["Exponents and complex numbers","1LRsDqHnA09AS1nlycABcK54IeZNVlc_x",""],
+["Word problems","1THZaV4AbE8vETWj5RGrZl9EmNuVDc6ev","1CNHWOcAS1_d4JuQilb-klc21_CMf2gVv"],
+["Volume","1EP1Ty_bvDYVWWTlYd8ruy54cXRU7-9W_",""],
+["Ratio with exercises","1O7Nw7tOuar1i_cf6t6TWmhvS15IHyc0m",""],
+["Ratio and proportion","1DxFcr2S304VCndvmarkcXeJItbPEIzrc",""]
+];
+const u=id=>`https://drive.google.com/file/d/${id}/view?usp=drive_link`;
+const item=(id,cls,icon,txt)=>id?`<a class="${cls}" href="${u(id)}" target="_blank" rel="noopener">${icon} ${txt}</a>`:`<span>${icon} ${txt}<small>Coming soon</small></span>`;
+document.getElementById('list').innerHTML=L.map(([n,v,s])=>`<section class="lesson"><h2>${n}</h2><div class="links">${item(v,'v','▶','Lesson recording')}${item(s,'s','📄','Lesson sheet')}</div></section>`).join('');
+</script>
+</body>
+</html>
