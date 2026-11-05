@@ -38,21 +38,21 @@ const L=[
 ["Quadratic equation","1GmdSUzVjl3A3CKquckiCxr8L2WZZWD-x","11bEo-r_TCSQkLgT0fK5TFGLYcAPWLzmW"],
 ["Inequality","1xYOiYWEWDA_5MGNfUg_H-ZiimZIyKj64",""],
 ["Absolute value","",""],
-["Angles","",""],
-["Triangles","13BDDM6KbAUbSZ7efw9tpoQvqjfvMqkgX","1HH9oLKjgDwarbirz46vMThyeq6dKyPQV"],
-["Circles","",""],
-["Trigonometry","",""],
-["Mean, mode, median","1xOYtTnZIZaN-ptdcvVGTaurlEVB0rW1R",""],
-["Graphs","1INRXWDLCrL5WVnIBcc7h3Kd3i9Le6Kae",""],
+["Angles","","","1_uDHvEGfARxO4UtdvUACkEqGNcHA5mO-"],
+["Triangles","","","1TmfkWlrLCgIbTJ5FDOcY6hngNK_VT6ZC"],
+["Circles","","","1_8OUUZDGdyZjzxEUBQn0mnAUiTEie151"],
+["Trigonometry","","","1yFJYU0uGRXupZsvjlMkxcxKKmPzPG6yj"],
+["Mean, mode, median","","","1sewCliMM-tETYD_n8p2-dRCcTruGAAot"],
+["Graphs","","","15Ev6EbzGn8m7PpBiA1bOq7Rdn0C69Bpj"],
 ["Exponents and complex numbers","1LRsDqHnA09AS1nlycABcK54IeZNVlc_x",""],
-["Word problems","1THZaV4AbE8vETWj5RGrZl9EmNuVDc6ev","1CNHWOcAS1_d4JuQilb-klc21_CMf2gVv"],
-["Volume","1EP1Ty_bvDYVWWTlYd8ruy54cXRU7-9W_",""],
+["Word problems","","","13AF1O4o0SWe-vMYOwUGQPW_ff3rmUEyI"],
+["Volume","","","15llXF3FHPSKoXYLV1_dFDATMdAkDqCe4"],
 ["Ratio with exercises","1O7Nw7tOuar1i_cf6t6TWmhvS15IHyc0m",""],
 ["Ratio and proportion","1DxFcr2S304VCndvmarkcXeJItbPEIzrc",""]
 ];
-const u=id=>`https://drive.google.com/file/d/${id}/view?usp=drive_link`;
+const u=id=>id.startsWith('http')?id:`https://drive.google.com/file/d/${id}/view?usp=drive_link`;
 const item=(id,cls,icon,txt)=>id?`<a class="${cls}" href="${u(id)}" target="_blank" rel="noopener">${icon} ${txt}</a>`:`<span>${icon} ${txt}<small>Coming soon</small></span>`;
-document.getElementById('list').innerHTML=L.map(([n,v,s])=>`<section class="lesson"><h2>${n}</h2><div class="links">${item(v,'v','▶','Lesson recording')}${item(s,'s','📄','Lesson sheet')}</div></section>`).join('');
+document.getElementById('list').innerHTML=L.map(([n,v,s,f])=>`<section class="lesson"><h2>${n}</h2><div class="links">${f?`<a class="v" href="https://drive.google.com/drive/folders/${f}?usp=drive_link" target="_blank" rel="noopener">📁 Open lesson folder (recording + sheet)</a>`:item(v,'v','▶','Lesson recording')+item(s,'s','📄','Lesson sheet')}</div></section>`).join('');
 </script>
 </body>
 </html>
