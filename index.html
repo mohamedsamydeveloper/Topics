@@ -1,58 +1,599 @@
 <!DOCTYPE html>
-<html lang="en" dir="ltr">
+<html lang="en" class="dark">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
-<title>Math Lessons</title>
-<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@400;600;800&display=swap" rel="stylesheet">
-<style>
-:root{--bg:#f3f6fb;--card:#fff;--ink:#14213d;--mute:#5b6783;--line:#dbe2ef;--vid:#1d4ed8;--sh:#0f766e;--off:#94a3b8;
-box-sizing:border-box;padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}
-@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0e1424;--card:#172038;--ink:#eef2ff;--mute:#9aa7c7;--line:#27335a;--vid:#6ea0ff;--sh:#4fd1c1;--off:#5b6783}}
-:root[data-theme="dark"]{--bg:#0e1424;--card:#172038;--ink:#eef2ff;--mute:#9aa7c7;--line:#27335a;--vid:#6ea0ff;--sh:#4fd1c1;--off:#5b6783}
-*{box-sizing:border-box}
-body{margin:0;background:var(--bg);color:var(--ink);font-family:'Cairo',Tahoma,Arial,sans-serif}
-header{max-width:760px;margin:0 auto;padding:40px 20px 16px}
-h1{margin:0 0 6px;font-size:2rem;font-weight:800}
-header p{margin:0;color:var(--mute)}
-main{max-width:760px;margin:0 auto;padding:12px 20px 48px;display:grid;gap:14px}
-.lesson{background:var(--card);border:1px solid var(--line);border-radius:14px;padding:18px 20px}
-.lesson h2{margin:0 0 12px;font-size:1.2rem;font-weight:800;direction:ltr;text-align:left}
-.links{display:grid;gap:8px}
-.links a,.links span{display:flex;align-items:center;gap:10px;padding:12px 14px;border-radius:10px;border:1px solid var(--line);text-decoration:none;font-weight:600}
-.links a.v{color:var(--vid)}.links a.s{color:var(--sh)}
-.links a:hover,.links a:focus-visible{background:var(--bg);outline:2px solid currentColor;outline-offset:1px}
-.links span{color:var(--off);border-style:dashed}
-.links small{margin-inline-start:auto;font-weight:400;color:var(--mute)}
-</style>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dr. Mohamed Samy - Math Lessons</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@600;700;800&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            darkMode: 'class',
+            theme: {
+                extend: {
+                    fontFamily: {
+                        sans: ['"Plus Jakarta Sans"', 'sans-serif'],
+                        serif: ['Cinzel', 'serif'],
+                    },
+                    colors: {
+                        navy: {
+                            950: '#030712',
+                            900: '#050c1e',
+                            850: '#09152e',
+                            800: '#0e1e3e',
+                            700: '#172a52',
+                        },
+                        sapphire: {
+                            400: '#60a5fa',
+                            500: '#3b82f6',
+                            600: '#2563eb',
+                            700: '#1d4ed8',
+                        },
+                        emerald: {
+                            400: '#34d399',
+                            500: '#10b981',
+                            600: '#059669',
+                            700: '#047857',
+                        }
+                    }
+                }
+            }
+        }
+    </script>
+    <style>
+        html {
+            scroll-behavior: smooth;
+        }
+        body {
+            background-color: #040d21;
+            color: #f3f4f6;
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            overflow-x: hidden;
+        }
+        .glass-card {
+            background: linear-gradient(135deg, rgba(14, 30, 62, 0.65) 0%, rgba(9, 21, 46, 0.85) 100%);
+            backdrop-filter: blur(16px);
+            -webkit-backdrop-filter: blur(16px);
+            border: 1px solid rgba(59, 130, 246, 0.18);
+            box-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5);
+        }
+        .glass-card:hover {
+            border-color: rgba(96, 165, 250, 0.35);
+            box-shadow: 0 15px 35px -10px rgba(37, 99, 235, 0.25);
+        }
+        ::-webkit-scrollbar {
+            width: 6px;
+            height: 6px;
+        }
+        ::-webkit-scrollbar-track {
+            background: rgba(9, 21, 46, 0.8);
+        }
+        ::-webkit-scrollbar-thumb {
+            background: #1d4ed8;
+            border-radius: 9999px;
+        }
+        ::-webkit-scrollbar-thumb:hover {
+            background: #3b82f6;
+        }
+    </style>
 </head>
-<body>
-<header><h1>Math Lessons</h1><p>Pick a lesson, watch the recording, and solve the sheet.</p></header>
-<main id="list"></main>
-<script>
-const L=[
-["Percent","1ZxUgDg8l3AqkAlpwXOlYHu17gievQi9f","1dYDKbFo9E9VkS_1ClbU51kYWD_TGpIgV"],
-["Linear equation","1SQD6do3t3rvRscp4pwgIKJv4upY6XfFl","13aTEbHZnCJSDgaStHUjRMN26p82eGaZq"],
-["System of equation","1331w47a6-cQE5zasAIqrOHy4tjIf0ZeL","1anLduHyQo4JiRLu1kcnIWsY0Jh7H3v0Q"],
-["Functions","1kdTJl7qochLozu7mFcr_Lj5gHEgDiMae","17-d6CtLe0783tAafLQSkefbL5SxSj5b9"],
-["Quadratic equation","1GmdSUzVjl3A3CKquckiCxr8L2WZZWD-x","11bEo-r_TCSQkLgT0fK5TFGLYcAPWLzmW"],
-["Inequality","1xYOiYWEWDA_5MGNfUg_H-ZiimZIyKj64",""],
-["Absolute value","",""],
-["Angles","","","1_uDHvEGfARxO4UtdvUACkEqGNcHA5mO-"],
-["Triangles","","","1TmfkWlrLCgIbTJ5FDOcY6hngNK_VT6ZC"],
-["Circles","","","1_8OUUZDGdyZjzxEUBQn0mnAUiTEie151"],
-["Trigonometry","","","1yFJYU0uGRXupZsvjlMkxcxKKmPzPG6yj"],
-["Mean, mode, median","","","1sewCliMM-tETYD_n8p2-dRCcTruGAAot"],
-["Graphs","","","15Ev6EbzGn8m7PpBiA1bOq7Rdn0C69Bpj"],
-["Exponents and complex numbers","1LRsDqHnA09AS1nlycABcK54IeZNVlc_x",""],
-["Word problems","","","13AF1O4o0SWe-vMYOwUGQPW_ff3rmUEyI"],
-["Volume","","","15llXF3FHPSKoXYLV1_dFDATMdAkDqCe4"],
-["Ratio with exercises","1O7Nw7tOuar1i_cf6t6TWmhvS15IHyc0m",""],
-["Ratio and proportion","1DxFcr2S304VCndvmarkcXeJItbPEIzrc",""]
-];
-const u=id=>id.startsWith('http')?id:`https://drive.google.com/file/d/${id}/view?usp=drive_link`;
-const item=(id,cls,icon,txt)=>id?`<a class="${cls}" href="${u(id)}" target="_blank" rel="noopener">${icon} ${txt}</a>`:`<span>${icon} ${txt}<small>Coming soon</small></span>`;
-document.getElementById('list').innerHTML=L.map(([n,v,s,f])=>`<section class="lesson"><h2>${n}</h2><div class="links">${f?`<a class="v" href="https://drive.google.com/drive/folders/${f}?usp=drive_link" target="_blank" rel="noopener">📁 Open lesson folder (recording + sheet)</a>`:item(v,'v','▶','Lesson recording')+item(s,'s','📄','Lesson sheet')}</div></section>`).join('');
-</script>
+<body class="min-h-screen flex flex-col justify-between selection:bg-sapphire-600 selection:text-white">
+
+    <!-- Ambient Background Glows -->
+    <div class="fixed inset-0 pointer-events-none z-0 overflow-hidden">
+        <div class="absolute -top-40 left-1/2 -translate-x-1/2 w-[800px] h-[500px] bg-sapphire-600/15 rounded-full blur-[140px]"></div>
+        <div class="absolute top-1/3 -left-40 w-[500px] h-[500px] bg-blue-900/20 rounded-full blur-[160px]"></div>
+        <div class="absolute bottom-10 right-0 w-[600px] h-[600px] bg-cyan-900/10 rounded-full blur-[180px]"></div>
+    </div>
+
+    <!-- Main Content Container -->
+    <div class="relative z-10 flex-grow">
+        
+        <!-- HEADER SECTION -->
+        <header class="relative border-b border-sapphire-700/30 bg-navy-900/80 backdrop-blur-md pt-8 pb-10 px-4 sm:px-8">
+            <div class="max-w-7xl mx-auto text-center">
+                
+                <!-- Academic Badge -->
+                <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-sapphire-900/60 border border-sapphire-500/30 text-sapphire-400 text-xs font-semibold tracking-wider uppercase mb-4 shadow-inner">
+                    <span class="w-2 h-2 rounded-full bg-emerald-400 animate-pulse"></span>
+                    Official Mathematics Course Portal
+                </div>
+
+                <!-- Instructor Title -->
+                <h1 class="text-4xl sm:text-5xl md:text-6xl font-extrabold tracking-tight font-serif text-white mb-2">
+                    <span class="bg-gradient-to-r from-blue-100 via-sky-200 to-blue-300 bg-clip-text text-transparent">
+                        Dr. Mohamed Samy
+                    </span>
+                </h1>
+
+                <!-- Subtitle -->
+                <p class="text-xl sm:text-2xl font-bold text-sapphire-400 tracking-wide mb-3">
+                    Math Lessons & Practice Hub
+                </p>
+
+                <p class="max-w-2xl mx-auto text-sm sm:text-base text-gray-300 leading-relaxed font-light">
+                    Access high-definition recorded video sessions and comprehensive practice problem sheets for all 17 core curriculum modules.
+                </p>
+
+                <!-- Statistics Bar -->
+                <div class="mt-8 grid grid-cols-2 sm:grid-cols-3 max-w-xl mx-auto gap-3 text-center">
+                    <div class="glass-card py-2.5 px-4 rounded-xl border border-sapphire-500/20">
+                        <span class="block text-xl font-bold text-white">17</span>
+                        <span class="text-xs text-gray-400 font-medium">Math Modules</span>
+                    </div>
+                    <div class="glass-card py-2.5 px-4 rounded-xl border border-sapphire-500/20">
+                        <span class="block text-xl font-bold text-sapphire-400">17</span>
+                        <span class="text-xs text-gray-400 font-medium">Recorded Folders</span>
+                    </div>
+                    <div class="glass-card py-2.5 px-4 rounded-xl border border-sapphire-500/20 col-span-2 sm:col-span-1">
+                        <span class="block text-xl font-bold text-emerald-400">15</span>
+                        <span class="text-xs text-gray-400 font-medium">Practice Folders</span>
+                    </div>
+                </div>
+
+            </div>
+        </header>
+
+        <!-- CONTROLS & SEARCH BAR -->
+        <section class="max-w-7xl mx-auto px-4 sm:px-8 mt-8">
+            <div class="glass-card p-4 sm:p-5 rounded-2xl flex flex-col lg:flex-row items-center justify-between gap-4 border border-sapphire-500/20 shadow-lg">
+                
+                <!-- Search Box -->
+                <div class="relative w-full lg:w-80">
+                    <div class="absolute inset-y-0 left-0 pl-3.5 flex items-center pointer-events-none text-gray-400">
+                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+                        </svg>
+                    </div>
+                    <input type="text" id="searchInput" oninput="filterLessons()" placeholder="Search lesson title or topic..." 
+                           class="w-full pl-10 pr-4 py-2.5 bg-navy-950/80 border border-sapphire-700/40 rounded-xl text-sm text-gray-100 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-sapphire-500 focus:border-transparent transition-all">
+                </div>
+
+                <!-- Category Pills -->
+                <div class="flex items-center gap-1.5 overflow-x-auto w-full lg:w-auto pb-2 lg:pb-0 text-xs font-medium scrollbar-none">
+                    <button onclick="filterByCategory('all')" id="cat-all" class="cat-btn active px-3.5 py-2 rounded-lg bg-sapphire-600 text-white shadow hover:bg-sapphire-500 transition-all whitespace-nowrap">
+                        All Lessons (17)
+                    </button>
+                    <button onclick="filterByCategory('algebra')" id="cat-algebra" class="cat-btn px-3.5 py-2 rounded-lg bg-navy-800/80 text-gray-300 border border-sapphire-800/50 hover:bg-sapphire-900/50 transition-all whitespace-nowrap">
+                        Algebra
+                    </button>
+                    <button onclick="filterByCategory('geometry')" id="cat-geometry" class="cat-btn px-3.5 py-2 rounded-lg bg-navy-800/80 text-gray-300 border border-sapphire-800/50 hover:bg-sapphire-900/50 transition-all whitespace-nowrap">
+                        Geometry
+                    </button>
+                    <button onclick="filterByCategory('data')" id="cat-data" class="cat-btn px-3.5 py-2 rounded-lg bg-navy-800/80 text-gray-300 border border-sapphire-800/50 hover:bg-sapphire-900/50 transition-all whitespace-nowrap">
+                        Statistics & Data
+                    </button>
+                    <button onclick="filterByCategory('applied')" id="cat-applied" class="cat-btn px-3.5 py-2 rounded-lg bg-navy-800/80 text-gray-300 border border-sapphire-800/50 hover:bg-sapphire-900/50 transition-all whitespace-nowrap">
+                        Ratios & Word Problems
+                    </button>
+                </div>
+
+                <!-- Global View Switcher -->
+                <div class="flex items-center bg-navy-950 p-1 rounded-xl border border-sapphire-700/40 shrink-0">
+                    <span class="text-xs text-gray-400 px-2.5 font-medium hidden sm:inline">Global Tab:</span>
+                    <button onclick="setGlobalTab('recorded')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-300 hover:text-white hover:bg-sapphire-900/40 transition-all flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-sapphire-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                        Videos
+                    </button>
+                    <button onclick="setGlobalTab('sheets')" class="px-3 py-1.5 rounded-lg text-xs font-semibold text-gray-300 hover:text-white hover:bg-sapphire-900/40 transition-all flex items-center gap-1.5">
+                        <svg class="w-3.5 h-3.5 text-emerald-400" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                        Sheets
+                    </button>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- LESSONS CARDS CONTAINER -->
+        <main class="max-w-7xl mx-auto px-4 sm:px-8 py-8 space-y-6" id="lessonsContainer">
+            <!-- Dynamically Populated via JS -->
+        </main>
+
+        <!-- EMPTY STATE MESSAGE -->
+        <div id="noResults" class="hidden max-w-7xl mx-auto px-4 sm:px-8 my-12">
+            <div class="glass-card p-12 text-center rounded-2xl border border-sapphire-700/30">
+                <div class="w-16 h-16 mx-auto mb-4 rounded-full bg-sapphire-900/40 border border-sapphire-600/30 flex items-center justify-center text-sapphire-400">
+                    <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 9.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+                </div>
+                <h3 class="text-xl font-bold text-white mb-2">No Matching Lessons Found</h3>
+                <p class="text-gray-400 text-sm max-w-md mx-auto">Try adjusting your search query or select another category filter above.</p>
+                <button onclick="resetFilters()" class="mt-5 px-5 py-2.5 bg-sapphire-600 hover:bg-sapphire-500 text-white font-semibold text-xs rounded-xl shadow-lg transition-all">Reset Search & Filters</button>
+            </div>
+        </div>
+
+        <!-- FOOTER -->
+        <footer class="mt-16 border-t border-sapphire-700/30 bg-navy-900/90 py-8 px-4 sm:px-8 text-center text-gray-400 text-xs">
+            <div class="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+                <div class="flex items-center gap-2">
+                    <div class="w-7 h-7 rounded-lg bg-sapphire-600 flex items-center justify-center font-serif text-white font-bold text-sm">MS</div>
+                    <span class="font-semibold text-gray-200">Dr. Mohamed Samy &bull; Math Lessons Portal</span>
+                </div>
+                <p class="text-gray-400">Direct Google Drive Resource Access Hub</p>
+            </div>
+        </footer>
+    </div>
+
+    <!-- TOAST NOTIFICATION -->
+    <div id="toast" class="fixed bottom-6 right-6 z-50 transform translate-y-20 opacity-0 transition-all duration-300 pointer-events-none">
+        <div class="flex items-center gap-3 bg-navy-900 text-white border border-sapphire-500/50 px-4 py-3 rounded-xl shadow-2xl shadow-sapphire-900/80">
+            <div class="w-8 h-8 rounded-full bg-emerald-500/20 text-emerald-400 flex items-center justify-center shrink-0">
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+            </div>
+            <div>
+                <p class="text-xs font-bold text-emerald-400">Copied to Clipboard</p>
+                <p id="toastMessage" class="text-xs text-gray-300 font-medium">Link copied successfully.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- JAVASCRIPT DATA & LOGIC -->
+    <script>
+        // Exact Lesson Data Array with all updated links
+        const lessonsData = [
+            {
+                id: 1,
+                title: "Percent",
+                category: "algebra",
+                recorded: { type: "file", link: "https://drive.google.com/file/d/1ZxUgDg8l3AqkAlpwXOlYHu17gievQi9f/view?usp=drive_link", label: "Recorded Session Video" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1E7Eiyeg5a0iuzErfeYGqMry1d7Qg1J4p?usp=drive_link", label: "Percent Practice Sheets" }
+            },
+            {
+                id: 2,
+                title: "Linear Equation",
+                category: "algebra",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1Uk5KN0kghFJUV8U8Z9OpUK9I_fgiwnAO?usp=drive_link", label: "Linear Equation Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1y7Y5LFsZOQnng0yqXbtD0tMLiJO6wOWI?usp=drive_link", label: "Linear Equation Sheets" }
+            },
+            {
+                id: 3,
+                title: "System of Equations",
+                category: "algebra",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1DFLfZuzgtzURxppSNBN29QFUrw5MyMie?usp=drive_link", label: "System of Equations Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1o9VF3MAr-jJsEzKGVyRD4xr6MNmZktd-?usp=drive_link", label: "System of Equations Sheets" }
+            },
+            {
+                id: 4,
+                title: "Functions",
+                category: "algebra",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1fiW2IuO1E3DRymlm2GBIIN8KOnZUV9o2?usp=drive_link", label: "Functions Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1E3f84W-CCyulmI9HbLfNY--QNur5tMQo?usp=drive_link", label: "Functions Sheets" }
+            },
+            {
+                id: 5,
+                title: "Quadratic Equations",
+                category: "algebra",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1PwloAm8RCRx3yXAZf0gI1s7CfFzQ3FK6?usp=drive_link", label: "Quadratics Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/15MfHa-oniX4wwqN-NtJcbGLaJRU5mbFW?usp=drive_link", label: "Quadratic Functions Sheets" }
+            },
+            {
+                id: 6,
+                title: "Inequality & Absolute Value",
+                category: "algebra",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1iHiFmwqhVeuVvGNTnpO93cK--jt2-Ikr?usp=drive_link", label: "Inequality & Absolute Recorded Folder" },
+                sheets: null
+            },
+            {
+                id: 7,
+                title: "Angles",
+                category: "geometry",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1_uDHvEGfARxO4UtdvUACkEqGNcHA5mO-?usp=drive_link", label: "Angles Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1m8HOHd6IFe9CSNZEjTZkJyoJfYfPsj8l?usp=drive_link", label: "Angles Sheets" }
+            },
+            {
+                id: 8,
+                title: "Triangles",
+                category: "geometry",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1TmfkWlrLCgIbTJ5FDOcY6hngNK_VT6ZC?usp=drive_link", label: "Triangles Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1hmFfB729SJTxowNmvNgYlf-ketwxIZHV?usp=drive_link", label: "Triangles Sheets" }
+            },
+            {
+                id: 9,
+                title: "Circles",
+                category: "geometry",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1_8OUUZDGdyZjzxEUBQn0mnAUiTEie151?usp=drive_link", label: "Circles Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/12KIO-iI-APDGIxhNalAx09hhv3hcrn08?usp=drive_link", label: "Circles Sheets" }
+            },
+            {
+                id: 10,
+                title: "Trigonometry",
+                category: "geometry",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1yFJYU0uGRXupZsvjlMkxcxKKmPzPG6yj?usp=drive_link", label: "Trigonometry Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/13WIg-Q1PbK9gAoCafCV0dKZ3u5zMhV6S?usp=drive_link", label: "Trigonometry Sheets" }
+            },
+            {
+                id: 11,
+                title: "Statistics (Mean, Mode, Median)",
+                category: "data",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1sewCliMM-tETYD_n8p2-dRCcTruGAAot?usp=drive_link", label: "Statistics Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1qA3T27sR4V6qwUvQ-Y2s4H-KeTv1y7BN?usp=drive_link", label: "Statistics Sheets" }
+            },
+            {
+                id: 12,
+                title: "Graphs",
+                category: "data",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/15Ev6EbzGn8m7PpBiA1bOq7Rdn0C69Bpj?usp=drive_link", label: "Graphs Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1FxqixWFHbQ2ii748BGXNZ_1mfpEgh_5F?usp=drive_link", label: "Graphs Sheets" }
+            },
+            {
+                id: 13,
+                title: "Exponents & Complex Numbers",
+                category: "algebra",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1VUkKfKwvt6huL6HR4Yzwgm6__z-YXLE7?usp=drive_link", label: "Exponents Recorded Folder" },
+                sheets: null
+            },
+            {
+                id: 14,
+                title: "Word Problems",
+                category: "applied",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/13AF1O4o0SWe-vMYOwUGQPW_ff3rmUEyI?usp=drive_link", label: "Word Problems Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1Zd462O7Lfs8pJPEBOHpCpmUet7EyK32u?usp=drive_link", label: "Word Problems Sheets" }
+            },
+            {
+                id: 15,
+                title: "Volume",
+                category: "geometry",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/15llXF3FHPSKoXYLV1_dFDATMdAkDqCe4?usp=drive_link", label: "Volume Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/14ItvCcXXfYWnfhtL6gZFMzE7iedM0oGQ?usp=drive_link", label: "Volume Sheets" }
+            },
+            {
+                id: 16,
+                title: "Ratio",
+                category: "applied",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1JR4CAUfJHJ4zt62DqRDeU0TfHFIRpPr1?usp=drive_link", label: "Ratio Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1p1Cr_-Pa0DcI9PZvvrhExdv1dAZanXtU?usp=drive_link", label: "Ratio Sheets" }
+            },
+            {
+                id: 17,
+                title: "Proportion",
+                category: "applied",
+                recorded: { type: "folder", link: "https://drive.google.com/drive/folders/1FH6eZIoH7VTpBnccQaDwhJt2zzFznuFC?usp=drive_link", label: "Proportion Recorded Folder" },
+                sheets: { type: "folder", link: "https://drive.google.com/drive/folders/1ECBpzjhosPjzpthg67LVbYoakciRXyE5?usp=drive_link", label: "Proportion Sheets" }
+            }
+        ];
+
+        let activeCategory = 'all';
+
+        // Render Cards Dynamically
+        function renderCards() {
+            const container = document.getElementById('lessonsContainer');
+            container.innerHTML = lessonsData.map((item, idx) => {
+                const numStr = String(idx + 1).padStart(2, '0');
+                const hasSheets = item.sheets !== null;
+
+                return `
+                <div class="lesson-card glass-card rounded-2xl overflow-hidden transition-all duration-300" data-id="${item.id}" data-category="${item.category}" data-title="${item.title.toLowerCase()}">
+                    
+                    <!-- Card Top Header -->
+                    <div class="px-6 py-5 border-b border-sapphire-700/30 flex flex-col sm:flex-row sm:items-center justify-between gap-3 bg-gradient-to-r from-navy-900/90 via-navy-850 to-navy-900">
+                        <div class="flex items-center gap-3.5">
+                            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-sapphire-500 to-sapphire-700 flex items-center justify-center text-white font-bold text-base shadow-md shadow-sapphire-600/30 shrink-0">
+                                ${numStr}
+                            </div>
+                            <div>
+                                <span class="text-xs font-semibold uppercase tracking-wider text-sapphire-400">Lesson ${item.id}</span>
+                                <h2 class="text-xl sm:text-2xl font-bold text-white tracking-tight">${item.title}</h2>
+                            </div>
+                        </div>
+                        <div class="flex items-center gap-2">
+                            <span class="px-2.5 py-1 rounded-full bg-sapphire-950/80 text-sapphire-300 border border-sapphire-500/20 text-xs font-medium">Recorded Available</span>
+                            <span class="px-2.5 py-1 rounded-full ${hasSheets ? 'bg-emerald-950/80 text-emerald-300 border-emerald-500/20' : 'bg-gray-800 text-gray-400 border-gray-700'} border text-xs font-medium">
+                                ${hasSheets ? 'Sheets Available' : 'Sheets Soon'}
+                            </span>
+                        </div>
+                    </div>
+
+                    <!-- Dual Tabs Nav -->
+                    <div class="px-6 pt-4 bg-navy-950/40 border-b border-sapphire-800/30 flex items-center gap-3">
+                        <button onclick="switchTab(${item.id}, 'recorded')" id="tab-btn-${item.id}-recorded" class="tab-btn py-2.5 px-4 font-semibold text-sm rounded-t-xl transition-all border-b-2 border-sapphire-500 text-sapphire-400 bg-sapphire-900/30 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 10l4.553-2.276A1 1 0 0121 8.618v6.764a1 1 0 01-1.447.894L15 14M5 18h8a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                            Recorded Session
+                        </button>
+                        <button onclick="switchTab(${item.id}, 'sheets')" id="tab-btn-${item.id}-sheets" class="tab-btn py-2.5 px-4 font-semibold text-sm rounded-t-xl transition-all border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center gap-2">
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                            Practice Sheets
+                        </button>
+                    </div>
+
+                    <!-- Tab Contents Body -->
+                    <div class="p-6">
+                        <!-- Recorded Tab Content -->
+                        <div id="tab-content-${item.id}-recorded" class="tab-content space-y-4">
+                            <div class="p-4 rounded-xl bg-navy-950/60 border border-sapphire-800/40 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-sapphire-500/40 transition-all">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-lg bg-sapphire-900/50 border border-sapphire-600/30 flex items-center justify-center text-sapphire-400 shrink-0">
+                                        ${item.recorded.type === 'file' 
+                                            ? '<svg class="w-6 h-6" fill="currentColor" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M10 18a8 8 0 100-16 8 8 0 000 16zM9.555 7.168A1 1 0 008 8v4a1 1 0 001.555.832l3-2a1 1 0 000-1.664l-3-2z" clip-rule="evenodd"/></svg>'
+                                            : '<svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>'
+                                        }
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="font-bold text-white text-base">${item.title} - Recorded Session</h3>
+                                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-sapphire-500/20 text-sapphire-300 border border-sapphire-500/30 uppercase">
+                                                ${item.recorded.type === 'file' ? 'Direct Video' : 'Drive Folder'}
+                                            </span>
+                                        </div>
+                                        <p class="text-xs text-gray-400 mt-1">Google Drive ${item.recorded.type === 'file' ? 'Video File' : 'Folder'} • Full lecture content and worked examples.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2.5 w-full md:w-auto justify-end">
+                                    <button onclick="copyToClipboard('${item.recorded.link}', '${item.title} Video Link')" class="p-2.5 rounded-lg bg-navy-800 hover:bg-navy-700 text-gray-300 hover:text-white border border-sapphire-700/30 transition-all" title="Copy Link">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    </button>
+                                    <a href="${item.recorded.link}" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-lg bg-sapphire-600 hover:bg-sapphire-500 text-white font-semibold text-xs flex items-center gap-2 shadow-lg shadow-sapphire-700/30 transition-all">
+                                        Open Drive Link
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Sheets Tab Content -->
+                        <div id="tab-content-${item.id}-sheets" class="tab-content hidden space-y-4">
+                            ${hasSheets ? `
+                            <div class="p-4 rounded-xl bg-navy-950/60 border border-emerald-800/30 flex flex-col md:flex-row items-start md:items-center justify-between gap-4 hover:border-emerald-500/40 transition-all">
+                                <div class="flex items-center gap-4">
+                                    <div class="w-12 h-12 rounded-lg bg-emerald-950/60 border border-emerald-600/30 flex items-center justify-center text-emerald-400 shrink-0">
+                                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 7v10a2 2 0 002 2h14a2 2 0 002-2V9a2 2 0 00-2-2h-6l-2-2H5a2 2 0 00-2 2z"/></svg>
+                                    </div>
+                                    <div>
+                                        <div class="flex items-center gap-2">
+                                            <h3 class="font-bold text-white text-base">${item.title} - Practice Sheets</h3>
+                                            <span class="px-2 py-0.5 rounded text-[10px] font-bold bg-emerald-500/20 text-emerald-300 border border-emerald-500/30 uppercase">Drive Folder</span>
+                                        </div>
+                                        <p class="text-xs text-gray-400 mt-1">Google Drive Folder • Problem sheets, drill exercises, and answers.</p>
+                                    </div>
+                                </div>
+                                <div class="flex items-center gap-2.5 w-full md:w-auto justify-end">
+                                    <button onclick="copyToClipboard('${item.sheets.link}', '${item.title} Sheets Link')" class="p-2.5 rounded-lg bg-navy-800 hover:bg-navy-700 text-gray-300 hover:text-white border border-sapphire-700/30 transition-all" title="Copy Link">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 16H6a2 2 0 01-2-2V6a2 2 0 012-2h8a2 2 0 012 2v2m-6 12h8a2 2 0 002-2v-8a2 2 0 00-2-2h-8a2 2 0 00-2 2v8a2 2 0 002 2z"/></svg>
+                                    </button>
+                                    <a href="${item.sheets.link}" target="_blank" rel="noopener noreferrer" class="px-4 py-2.5 rounded-lg bg-emerald-600 hover:bg-emerald-500 text-white font-semibold text-xs flex items-center gap-2 shadow-lg shadow-emerald-700/30 transition-all">
+                                        Open Drive Folder
+                                        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/></svg>
+                                    </a>
+                                </div>
+                            </div>
+                            ` : `
+                            <div class="p-6 rounded-xl bg-navy-950/40 border border-gray-800 text-center flex flex-col items-center justify-center">
+                                <span class="px-3 py-1 rounded-full text-xs font-semibold bg-amber-500/10 text-amber-400 border border-amber-500/20 mb-2">Coming Soon</span>
+                                <p class="text-sm text-gray-300 font-medium">Practice sheets for ${item.title} will be uploaded shortly.</p>
+                                <p class="text-xs text-gray-500 mt-1">Please check back soon or use the recorded session video above.</p>
+                            </div>
+                            `}
+                        </div>
+                    </div>
+                </div>
+                `;
+            }).join('');
+        }
+
+        // Switch Single Card Tab
+        function switchTab(lessonId, tabType) {
+            const recordedContent = document.getElementById(`tab-content-${lessonId}-recorded`);
+            const sheetsContent = document.getElementById(`tab-content-${lessonId}-sheets`);
+            const recordedBtn = document.getElementById(`tab-btn-${lessonId}-recorded`);
+            const sheetsBtn = document.getElementById(`tab-btn-${lessonId}-sheets`);
+
+            if (!recordedContent || !sheetsContent || !recordedBtn || !sheetsBtn) return;
+
+            if (tabType === 'recorded') {
+                recordedContent.classList.remove('hidden');
+                sheetsContent.classList.add('hidden');
+                recordedBtn.className = "tab-btn py-2.5 px-4 font-semibold text-sm rounded-t-xl transition-all border-b-2 border-sapphire-500 text-sapphire-400 bg-sapphire-900/30 flex items-center gap-2";
+                sheetsBtn.className = "tab-btn py-2.5 px-4 font-semibold text-sm rounded-t-xl transition-all border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center gap-2";
+            } else {
+                sheetsContent.classList.remove('hidden');
+                recordedContent.classList.add('hidden');
+                sheetsBtn.className = "tab-btn py-2.5 px-4 font-semibold text-sm rounded-t-xl transition-all border-b-2 border-emerald-500 text-emerald-400 bg-emerald-900/30 flex items-center gap-2";
+                recordedBtn.className = "tab-btn py-2.5 px-4 font-semibold text-sm rounded-t-xl transition-all border-b-2 border-transparent text-gray-400 hover:text-gray-200 flex items-center gap-2";
+            }
+        }
+
+        // Switch Global View
+        function setGlobalTab(tabType) {
+            lessonsData.forEach(item => {
+                switchTab(item.id, tabType);
+            });
+        }
+
+        // Category Filter
+        function filterByCategory(cat) {
+            activeCategory = cat;
+            document.querySelectorAll('.cat-btn').forEach(btn => {
+                btn.className = "cat-btn px-3.5 py-2 rounded-lg bg-navy-800/80 text-gray-300 border border-sapphire-800/50 hover:bg-sapphire-900/50 transition-all whitespace-nowrap";
+            });
+            const activeBtn = document.getElementById(`cat-${cat}`);
+            if (activeBtn) {
+                activeBtn.className = "cat-btn active px-3.5 py-2 rounded-lg bg-sapphire-600 text-white shadow hover:bg-sapphire-500 transition-all whitespace-nowrap font-semibold";
+            }
+            filterLessons();
+        }
+
+        // Search & Category Combined Filtering
+        function filterLessons() {
+            const query = document.getElementById('searchInput').value.toLowerCase().trim();
+            const cards = document.querySelectorAll('.lesson-card');
+            let visibleCount = 0;
+
+            cards.forEach(card => {
+                const category = card.getAttribute('data-category');
+                const title = card.getAttribute('data-title');
+                
+                const matchesCat = (activeCategory === 'all' || activeCategory === category);
+                const matchesSearch = (title.includes(query) || `lesson ${card.getAttribute('data-id')}`.includes(query));
+
+                if (matchesCat && matchesSearch) {
+                    card.classList.remove('hidden');
+                    visibleCount++;
+                } else {
+                    card.classList.add('hidden');
+                }
+            });
+
+            const noResults = document.getElementById('noResults');
+            if (visibleCount === 0) {
+                noResults.classList.remove('hidden');
+            } else {
+                noResults.classList.add('hidden');
+            }
+        }
+
+        function resetFilters() {
+            document.getElementById('searchInput').value = '';
+            filterByCategory('all');
+        }
+
+        // Frame-safe link copying with toast notification
+        function copyToClipboard(text, label) {
+            let success = false;
+            try {
+                const dummy = document.createElement("input");
+                document.body.appendChild(dummy);
+                dummy.setAttribute("value", text);
+                dummy.select();
+                success = document.execCommand("copy");
+                document.body.removeChild(dummy);
+            } catch (err) {
+                success = false;
+            }
+
+            if (!success && navigator.clipboard && window.isSecureContext) {
+                navigator.clipboard.writeText(text).then(() => {
+                    showToast(label);
+                }).catch(() => {
+                    showToast(label);
+                });
+            } else {
+                showToast(label);
+            }
+        }
+
+        let toastTimeout;
+        function showToast(label) {
+            const toast = document.getElementById('toast');
+            const toastMsg = document.getElementById('toastMessage');
+            
+            toastMsg.innerText = `Direct link for "${label}" copied!`;
+            
+            toast.classList.remove('translate-y-20', 'opacity-0', 'pointer-events-none');
+            toast.classList.add('translate-y-0', 'opacity-100');
+
+            clearTimeout(toastTimeout);
+            toastTimeout = setTimeout(() => {
+                toast.classList.remove('translate-y-0', 'opacity-100');
+                toast.classList.add('translate-y-20', 'opacity-0', 'pointer-events-none');
+            }, 3000);
+        }
+
+        // Initialize Cards on Page Load
+        window.addEventListener('DOMContentLoaded', () => {
+            renderCards();
+        });
+    </script>
 </body>
 </html>
